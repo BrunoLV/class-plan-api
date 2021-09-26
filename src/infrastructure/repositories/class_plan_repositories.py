@@ -2,7 +2,7 @@ from sqlalchemy.orm import Query
 
 from src.domain.entities.class_plan import ClassPlan
 from src.domain.repositories.class_plan_repository import ClassPlanRepository
-from src.infrastructure.db.orm.class_plan_orms import ClassPlan as orm
+from src.infrastructure.db.orm.class_plan_orms import ClassPlan as Orm
 
 
 class RelationalClassPlanRepository(ClassPlanRepository):
@@ -10,28 +10,28 @@ class RelationalClassPlanRepository(ClassPlanRepository):
     def __init__(self, session):
         self._session = session
 
-    def save(self, class_plan: ClassPlan) -> None:
-        self._session.add(orm.from_entity(class_plan))
+    def save(self, class_plan: ClassPlan):
+        self._session.add(Orm.from_entity(class_plan))
 
-    def update(self, entity: ClassPlan) -> None:
-        q: Query = self._session.query(orm).filter(orm.code == entity.code)
+    def update(self, entity: ClassPlan):
+        q: Query = self._session.query(Orm).filter(Orm.code == entity.code)
         if q.count() > 0:
-            db: orm = q.one()
+            db: Orm = q.one()
             db.update_with_entity_data(entity)
 
-    def delete(self, code: str) -> None:
-        q: Query = self._session.query(orm).filter(orm.code == code)
+    def delete(self, code: str):
+        q: Query = self._session.query(Orm).filter(Orm.code == code)
         if q.count():
             db = q.one()
             self._session.delete(db)
 
-    def find_by_code(self, code: str) -> ClassPlan:
-        q: Query = self._session.query(orm).filter(orm.code == code)
+    def find_by_code(self, code: str):
+        q: Query = self._session.query(Orm).filter(Orm.code == code)
         if q.count() > 0:
-            db: orm = q.one()
+            db: Orm = q.one()
             return db.to_entity()
         return None
 
     def list(self) -> []:
-        orms = self._session.query(orm).all()
+        orms = self._session.query(Orm).all()
         return list(map(lambda o: o.to_entity(), orms))

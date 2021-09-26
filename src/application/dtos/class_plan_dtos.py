@@ -13,7 +13,7 @@ from src.domain.value_objects.teacher import Teacher
 
 
 @dataclass
-class TeacherDto():
+class TeacherDto:
     code: str
     name: str
 
@@ -35,7 +35,7 @@ class TeacherDto():
 
 
 @dataclass
-class SubjectDto():
+class SubjectDto:
     code: str
     name: str
 
@@ -57,7 +57,7 @@ class SubjectDto():
 
 
 @dataclass
-class GroupDto():
+class GroupDto:
     code: str
     name: str
 
@@ -79,7 +79,7 @@ class GroupDto():
 
 
 @dataclass
-class ClassPlanDto():
+class ClassPlanDto:
     code: str
     teacher: TeacherDto
     group: GroupDto

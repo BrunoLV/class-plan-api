@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, Date, ForeignKey, Enum, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
-from src.domain.entities.class_plan import ClassPlan as entity, PeriodEnum
+from src.domain.entities.class_plan import ClassPlan as Entity, PeriodEnum
 from src.domain.value_objects.group import Group
 from src.domain.value_objects.subject import Subject
 from src.domain.value_objects.teacher import Teacher
@@ -11,7 +11,7 @@ Base = declarative_base()
 
 
 class ClassPlan(Base):
-    __tablename__ = "tb_class_plan"
+    __tablename__ = 'tb_class_plan'
 
     id = Column('id', Integer, primary_key=True)
     code = Column('code', String)
@@ -25,11 +25,11 @@ class ClassPlan(Base):
     date = Column('date', Date)
     contents = Column('contents', Text)
     evaluation = Column('evaluation', Text)
-    goals = relationship("ClassPlanGoal", cascade="all, delete-orphan")
-    materials = relationship("ClassPlanMaterial", cascade="all, delete-orphan")
+    goals = relationship('ClassPlanGoal', cascade='all, delete-orphan')
+    materials = relationship('ClassPlanMaterial', cascade='all, delete-orphan')
 
     def to_entity(self):
-        e = entity(contents=self.contents,
+        e = Entity(contents=self.contents,
                    evaluation=self.evaluation,
                    period=self.evaluation,
                    date=self.date,
@@ -68,7 +68,7 @@ class ClassPlan(Base):
             self.materials.append(material)
 
     @staticmethod
-    def from_entity(e: entity):
+    def from_entity(e: Entity):
         orm = ClassPlan()
         orm.code = e.code
         orm.contents = e.contents
@@ -96,16 +96,16 @@ class ClassPlan(Base):
 
 
 class ClassPlanGoal(Base):
-    __tablename__ = "tb_class_plan_goal"
+    __tablename__ = 'tb_class_plan_goal'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     description = Column(String, nullable=False)
-    class_plan_id = Column(Integer, ForeignKey("tb_class_plan.id"))
+    class_plan_id = Column(Integer, ForeignKey('tb_class_plan.id'))
 
 
 class ClassPlanMaterial(Base):
-    __tablename__ = "tb_class_plan_material"
+    __tablename__ = 'tb_class_plan_material'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     description = Column(String, nullable=False)
-    class_plan_id = Column(Integer, ForeignKey("tb_class_plan.id"))
+    class_plan_id = Column(Integer, ForeignKey('tb_class_plan.id'))

@@ -1,11 +1,4 @@
-class Teacher():
-    """
-    A class that defines a representation of a Teacher.
-
-    Properties:
-    code (str): code that identify the school subjects inside the system.
-    name (str): teacher's name.
-    """
+class Teacher:
 
     def __init__(self, code, name):
         self.code = code
@@ -18,8 +11,8 @@ class Teacher():
     @code.setter
     def code(self, value):
 
-        if value is None or type(value) is not str or value == "":
-            raise ValueError("Code must be a non Blank string.")
+        if value is None or type(value) is not str or value == '':
+            raise ValueError('Code must be a non Blank string.')
 
         self._code = value
 
@@ -30,7 +23,7 @@ class Teacher():
     @name.setter
     def name(self, value):
 
-        if value is None or type(value) is not str or value == "":
-            raise ValueError("Name must be a non Blank string.")
+        if value is None or type(value) is not str or value == '':
+            raise ValueError('Name must be a non Blank string.')
 
         self._name = value

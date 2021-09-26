@@ -14,7 +14,7 @@ class PeriodEnum(Enum):
     FOURTH = 4
 
 
-class ClassPlan():
+class ClassPlan:
 
     def __init__(self,
                  code,
@@ -25,9 +25,13 @@ class ClassPlan():
                  contents,
                  evaluation,
                  date=date.today,
-                 materials=[],
-                 goals=[]):
+                 materials=None,
+                 goals=None):
 
+        if goals is None:
+            goals = []
+        if materials is None:
+            materials = []
         self.code = code
         self.teacher = teacher
         self.group = group
@@ -55,7 +59,7 @@ class ClassPlan():
     def teacher(self, value):
 
         if value is None or type(value) is not Teacher:
-            raise ValueError("Teacher should be a object of Teacher type different than None.")
+            raise ValueError('Teacher should be a object of Teacher type different than None.')
 
         self._teacher = value
 
@@ -67,7 +71,7 @@ class ClassPlan():
     def group(self, value):
 
         if value is None or type(value) is not Group:
-            raise ValueError("Group should be a object of SchoolClass type different than None.")
+            raise ValueError('Group should be a object of SchoolClass type different than None.')
 
         self._group = value
 
@@ -79,7 +83,7 @@ class ClassPlan():
     def subject(self, value):
 
         if value is None or type(value) is not Subject:
-            raise ValueError("Subject must not be a object of SchoolSubjects type different than None.")
+            raise ValueError('Subject must not be a object of SchoolSubjects type different than None.')
 
         self._subject = value
 
@@ -98,8 +102,8 @@ class ClassPlan():
     @contents.setter
     def contents(self, value):
 
-        if value is None or type(value) is not str or value == "":
-            raise ValueError("Contents should be a non blank string.")
+        if value is None or type(value) is not str or value == '':
+            raise ValueError('Contents should be a non blank string.')
 
         self._contents = value
 
@@ -111,7 +115,7 @@ class ClassPlan():
     def evaluation(self, value):
 
         if value is None or type(value) is not str:
-            raise ValueError("Evaluation should be a string.")
+            raise ValueError('Evaluation should be a string.')
 
         self._evaluation = value
 
@@ -123,10 +127,10 @@ class ClassPlan():
     def date(self, value):
 
         if value is None or type(value) is not date:
-            raise ValueError("Date must be a date object different than None.")
+            raise ValueError('Date must be a date object different than None.')
 
         if value < date.today():
-            raise ValueError("The date should be equal or greater than the current date")
+            raise ValueError('The date should be equal or greater than the current date')
 
         self._date = value
 
@@ -138,7 +142,7 @@ class ClassPlan():
     def materials(self, value):
 
         if value is None or type(value) is not list:
-            raise ValueError("Materials should be a list.")
+            raise ValueError('Materials should be a list.')
 
         self._materials = value
 
@@ -150,14 +154,14 @@ class ClassPlan():
     def goals(self, value):
 
         if value is None or type(value) is not list:
-            raise ValueError("Goals should be a list.")
+            raise ValueError('Goals should be a list.')
 
         self._goals = value
 
     def add_goal(self, objective):
 
-        if objective is None or type(objective) is not str or objective == "":
-            raise ValueError("Goal must be a non Blank string.")
+        if objective is None or type(objective) is not str or objective == '':
+            raise ValueError('Goal must be a non Blank string.')
 
         if self._goals is None:
             self._goals = []
@@ -171,8 +175,8 @@ class ClassPlan():
 
     def add_material(self, material):
 
-        if material is None or type(material) is not str or material == "":
-            raise ValueError("Material must be a non Blank string.")
+        if material is None or type(material) is not str or material == '':
+            raise ValueError('Material must be a non Blank string.')
 
         if self._materials is None:
             self._materials = []

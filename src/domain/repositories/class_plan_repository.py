@@ -1,7 +1,7 @@
 from src.domain.entities.class_plan import ClassPlan
 
 
-class ClassPlanRepository():
+class ClassPlanRepository:
 
     def save(self, class_plan: ClassPlan) -> None:
         pass

@@ -1,20 +1,20 @@
-import datetime
 import uuid
+from datetime import date
 
-from src.domain.entities.class_plan import ClassPlan
+from src.domain.entities.class_plan import ClassPlan, PeriodEnum
 from src.domain.value_objects.group import Group
 from src.domain.value_objects.subject import Subject
 from src.domain.value_objects.teacher import Teacher
 
 
-class CreateClassPlanCommand():
+class CreateClassPlanCommand:
     teacher: Teacher
     group: Group
     subject: Subject
-    period: str
+    period: PeriodEnum
     contents: str
     evaluation: str
-    date: datetime.date
+    date: date
     materials: []
     goals: []
 
@@ -34,15 +34,15 @@ class CreateClassPlanCommand():
         return entity
 
 
-class UpdateClassPlanCommand():
+class UpdateClassPlanCommand:
     code: str
     teacher: Teacher
     group: Group
     subject: Subject
-    period: str
+    period: PeriodEnum
     contents: str
     evaluation: str
-    date: datetime.date
+    date: date
     materials: []
     goals: []
 
@@ -62,5 +62,5 @@ class UpdateClassPlanCommand():
         return entity
 
 
-class DeleteClassPlanCommand():
+class DeleteClassPlanCommand:
     code: str
