@@ -6,7 +6,7 @@ from typing import List
 
 from src.application.dtos.encoders.class_plan_dtos_encoders import ClassPlanDtoJsonEncoder, GroupDtoJsonEncoder, \
     SubjectDtoJsonEncoder, TeacherDtoJsonEncoder, json_default
-from src.domain.entities.class_plan import ClassPlan
+from src.domain.entities.class_plan import ClassPlan, PeriodEnum
 from src.domain.value_objects.group import Group
 from src.domain.value_objects.subject import Subject
 from src.domain.value_objects.teacher import Teacher
@@ -84,7 +84,7 @@ class ClassPlanDto:
     teacher: TeacherDto
     group: GroupDto
     subject: SubjectDto
-    period: str
+    period: PeriodEnum
     contents: str
     evaluation: str
     date: datetime.date
