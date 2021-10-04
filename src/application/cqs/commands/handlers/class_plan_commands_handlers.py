@@ -6,7 +6,7 @@ from src.application.cqs.commands.class_plan_commands import CreateClassPlanComm
 from src.domain.repositories.class_plan_repository import ClassPlanRepository
 from src.infrastructure.repositories.class_plan_repositories import RelationalClassPlanRepository
 
-eng = create_engine('postgresql+psycopg2://root:root@localhost:5432/class_plan_db')
+eng = create_engine('postgresql+psycopg2://root:root@localhost:5433/class_plan_db')
 
 
 class ClassPlanCommandHandler:

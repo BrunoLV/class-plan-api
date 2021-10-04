@@ -22,7 +22,7 @@ depends_on = None
 def upgrade():
     op.create_table(
         'tb_class_plan',
-        sa.Column('id', sa.INTEGER, primary_key=True, autoincremet=True),
+        sa.Column('id', sa.INTEGER, primary_key=True, autoincrement=True),
         sa.Column('code', sa.VARCHAR(150), unique=True, nullable=False),
         sa.Column('date', sa.DATE, nullable=False, default=datetime.date.today()),
         sa.Column('period', sa.Enum(PeriodEnum), nullable=False),
@@ -38,14 +38,14 @@ def upgrade():
 
     op.create_table(
         'tb_class_plan_material',
-        sa.Column('id', sa.INTEGER, primary_key=True, autoincremet=True),
+        sa.Column('id', sa.INTEGER, primary_key=True, autoincrement=True),
         sa.Column('description', sa.VARCHAR(150), nullable=False),
         sa.Column('class_plan_id', sa.INTEGER, sa.ForeignKey("tb_class_plan.id"), nullable=False)
     )
 
     op.create_table(
         'tb_class_plan_goal',
-        sa.Column('id', sa.INTEGER, primary_key=True, autoincremet=True),
+        sa.Column('id', sa.INTEGER, primary_key=True, autoincrement=True),
         sa.Column('description', sa.VARCHAR(150), nullable=False),
         sa.Column('class_plan_id', sa.INTEGER, sa.ForeignKey("tb_class_plan.id"), nullable=False)
     )

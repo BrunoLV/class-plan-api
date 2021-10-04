@@ -1,3 +1,6 @@
 # Project exclude paths
 /class-plan-api/
 /.idea/*
+/class_plan_api.egg-info/
+/dist/
+/venv/
