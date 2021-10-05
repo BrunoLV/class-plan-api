@@ -1,5 +1,3 @@
-from inspect import ismethod
-
 from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
 from flask import Flask, Blueprint

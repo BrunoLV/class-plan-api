@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Query
 
 from src.domain.entities.class_plan import ClassPlan
+from src.domain.exceptions.domais_expections import EntityhNotFoundError
 from src.domain.repositories.class_plan_repository import ClassPlanRepository
 from src.infrastructure.db.orm.class_plan_orms import ClassPlan as Orm
 
@@ -18,19 +19,24 @@ class RelationalClassPlanRepository(ClassPlanRepository):
         if q.count() > 0:
             db: Orm = q.one()
             db.update_with_entity_data(entity)
+        else:
+            raise EntityhNotFoundError('Entity not found')
 
     def delete(self, code: str):
         q: Query = self._session.query(Orm).filter(Orm.code == code)
-        if q.count():
+        if q.count() > 0:
             db = q.one()
             self._session.delete(db)
+        else:
+            raise EntityhNotFoundError('Entity not found')
 
     def find_by_code(self, code: str):
         q: Query = self._session.query(Orm).filter(Orm.code == code)
         if q.count() > 0:
             db: Orm = q.one()
             return db.to_entity()
-        return None
+        else:
+            raise EntityhNotFoundError('Entity not found')
 
     def list(self) -> []:
         orms = self._session.query(Orm).all()

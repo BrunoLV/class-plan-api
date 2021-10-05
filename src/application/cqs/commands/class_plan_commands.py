@@ -18,6 +18,25 @@ class CreateClassPlanCommand:
     materials: []
     goals: []
 
+    def is_valid(self):
+        errors = []
+        if self.teacher is None:
+            errors.append("[teacher] is a required information")
+        if self.group is None:
+            errors.append("[group] is a required information")
+        if self.subject is None:
+            errors.append("[subject] is a required information")
+        if self.period is None:
+            errors.append("[period] is a required information")
+        if self.subject is None:
+            errors.append("[subject] is a required information")
+        if self.subject is None:
+            errors.append("[subject] is a required information")
+        if self.subject is None:
+            errors.append("[subject] is a required information")
+        if self.subject is None:
+            errors.append("[subject] is a required information")
+
     def to_entity(self):
         entity = ClassPlan(
             code=str(uuid.uuid4()),

@@ -24,7 +24,7 @@ class ClassPlan:
                  period: PeriodEnum,
                  contents,
                  evaluation,
-                 date=date.today,
+                 date,
                  materials=None,
                  goals=None):
 
