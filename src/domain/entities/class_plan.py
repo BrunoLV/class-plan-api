@@ -8,10 +8,13 @@ from src.domain.value_objects.teacher import Teacher
 
 
 class PeriodEnum(Enum):
-    FIRST = 1,
-    SECOND = 2,
-    THIRD = 3,
-    FOURTH = 4
+    FIRST = "First"
+    SECOND = "Second"
+    THIRD = "Third"
+    FOURTH = "Fourth"
+
+    def __str__(self):
+        return self.value.upper()
 
 
 class ClassPlan:
@@ -32,9 +35,10 @@ class ClassPlan:
             goals = []
         if materials is None:
             materials = []
+
+        self.group = group
         self.code = code
         self.teacher = teacher
-        self.group = group
         self.subject = subject
         self.period = period
         self.contents = contents

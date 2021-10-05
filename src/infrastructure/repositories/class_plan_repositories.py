@@ -3,7 +3,7 @@ from sqlalchemy.orm import Query
 from src.domain.entities.class_plan import ClassPlan
 from src.domain.exceptions.domais_expections import EntityhNotFoundError
 from src.domain.repositories.class_plan_repository import ClassPlanRepository
-from src.infrastructure.db.orm.class_plan_orms import ClassPlan as Orm
+from src.infrastructure.db.orm.orms import ClassPlan as Orm
 
 
 class RelationalClassPlanRepository(ClassPlanRepository):
@@ -31,13 +31,12 @@ class RelationalClassPlanRepository(ClassPlanRepository):
             raise EntityhNotFoundError('Entity not found')
 
     def find_by_code(self, code: str):
-        q: Query = self._session.query(Orm).filter(Orm.code == code)
-        if q.count() > 0:
-            db: Orm = q.one()
-            return db.to_entity()
+        orm = Orm.query.filter_by(code=code).first()
+        if orm is not None:
+            return orm.to_entity()
         else:
             raise EntityhNotFoundError('Entity not found')
 
-    def list(self) -> []:
-        orms = self._session.query(Orm).all()
-        return list(map(lambda o: o.to_entity(), orms))
+    def list(self):
+        orm_list = Orm.query.all()
+        return list(map(lambda o: o.to_entity(), orm_list))

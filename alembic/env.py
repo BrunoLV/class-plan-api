@@ -1,3 +1,5 @@
+import os
+
 from logging.config import fileConfig
 
 from alembic import context
@@ -24,6 +26,8 @@ target_metadata = None
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
+section = config.config_ini_section
+config.set_section_option(section, "DB_CONNECTION_STRING", os.environ.get("DB_CONNECTION_STRING"))
 
 def run_migrations_offline():
     """Run migrations in 'offline' mode.
