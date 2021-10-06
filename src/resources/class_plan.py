@@ -5,6 +5,8 @@ from flask_apispec import marshal_with, doc, use_kwargs
 from flask_apispec.views import MethodResource
 from flask_restful import Resource, abort
 
+from marshmallow import ValidationError
+
 from src.application.controllers.class_plan_controllers import ClassPlanController
 from src.application.cqs.commands.class_plan_commands import CreateClassPlanCommand, UpdateClassPlanCommand, \
     DeleteClassPlanCommand
@@ -84,12 +86,15 @@ class ClassPlanCollectionResource(MethodResource, Resource):
     @use_kwargs(ClassPlanRequestSchema)
     @marshal_with(None, code=201, description="Resource created")
     def post(self, **kwargs):
-        command = ClassPlanCollectionResource._fill_create_command(kwargs)
-        created_code = self.controller.create(command)
-        response = make_response()
-        response.status_code = 201
-        response.headers['location'] = f'/class-plans/{created_code}'
-        return response
+        try:
+            command = ClassPlanCollectionResource._fill_create_command(kwargs)
+            created_code = self.controller.create(command)
+            response = make_response()
+            response.status_code = 201
+            response.headers['location'] = f'/class-plans/{created_code}'
+            return response
+        except ValidationError as err:
+            print(err)
 
     @doc(description="Get all class plans", tags=["class-plan"])
     @marshal_with(ClassPlanSchema(many=True), code=200, description="Resources found")

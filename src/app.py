@@ -1,11 +1,18 @@
 import os
 
 from flask import Flask
+
 from src.infrastructure.db.orm.orms import db
 from src.resources import blueprints
 from src.documentation import documentations
 
 app = Flask(__name__)
+
+
+@app.errorhandler(422)
+def handler_error_422(error):
+    return error.exc.messages, 422
+
 
 with app.app_context():
     blueprints.init_blueprint_class_plan()
