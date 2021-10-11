@@ -14,7 +14,7 @@ from src.domain.exceptions.domais_expections import EntityhNotFoundError
 from src.domain.value_objects.group import Group
 from src.domain.value_objects.subject import Subject
 from src.domain.value_objects.teacher import Teacher
-from src.resources.schemas.schemas import ClassPlanSchema, ClassPlanRequestSchema
+from src.resources.schemas import ClassPlanSchema, ClassPlanRequestSchema
 
 
 class ClassPlanResource(MethodResource, Resource):

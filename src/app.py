@@ -1,24 +1,25 @@
-import os
-
 from flask import Flask
 
 from src.infrastructure.db.orm.orms import db
 from src.resources import blueprints
 from src.documentation import documentations
 
-app = Flask(__name__)
+from src.config.config import app_config
 
 
-@app.errorhandler(422)
-def handler_error_422(error):
-    return error.exc.messages, 422
+def create_app(config_name):
+    app = Flask(__name__, instance_relative_config=True)
+    app.config.from_object(app_config[config_name])
+    app.config.from_pyfile('config.py')
 
+    with app.app_context():
+        blueprints.init_blueprint_class_plan()
+        documentations.init_documentation()
 
-with app.app_context():
-    blueprints.init_blueprint_class_plan()
-    documentations.init_documentation()
+    db.init_app(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DB_CONNECTION_STRING']
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config["SQLALCHEMY_ECHO"] = True
-db.init_app(app)
+    @app.errorhandler(422)
+    def handler_error_422(error):
+        return error.exc.messages, 422
+
+    return app
