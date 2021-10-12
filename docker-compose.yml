@@ -6,8 +6,15 @@ services:
     image: postgres:13.4-alpine
     restart: always
     ports:
-      - 5433:5432
+      - "5433:5432"
     environment:
       - POSTGRES_PASSWORD=root
       - POSTGRES_USER=root
       - POSTGRES_DB=class_plan_db
+
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
