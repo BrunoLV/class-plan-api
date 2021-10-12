@@ -1,6 +1,6 @@
 from flask import Blueprint
-from flask_restful import Api
 from flask import current_app as app
+from flask_restful import Api
 
 from src.resources.class_plan import ClassPlanResource, ClassPlanCollectionResource
 

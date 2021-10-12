@@ -5,7 +5,6 @@ from testcontainers.postgres import PostgresContainer
 
 from src.app import create_app
 from src.infrastructure.db.orm.orms import db
-
 from src.resources.schemas import ClassPlanSchema
 
 

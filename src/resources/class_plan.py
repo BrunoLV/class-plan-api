@@ -4,7 +4,6 @@ from flask import make_response
 from flask_apispec import marshal_with, doc, use_kwargs
 from flask_apispec.views import MethodResource
 from flask_restful import Resource, abort
-
 from marshmallow import ValidationError
 
 from src.application.controllers.class_plan_controllers import ClassPlanController

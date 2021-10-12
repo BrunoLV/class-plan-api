@@ -1,8 +1,7 @@
-from src.infrastructure.db.orm.orms import db
-
 from src.application.cqs.commands.class_plan_commands import CreateClassPlanCommand, DeleteClassPlanCommand, \
     UpdateClassPlanCommand
 from src.domain.repositories.class_plan_repository import ClassPlanRepository
+from src.infrastructure.db.orm.orms import db
 from src.infrastructure.repositories.class_plan_repositories import RelationalClassPlanRepository
 
 

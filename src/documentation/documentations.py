@@ -1,7 +1,7 @@
 from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
-from flask_apispec.extension import FlaskApiSpec
 from flask import current_app as app
+from flask_apispec.extension import FlaskApiSpec
 
 from src.resources.class_plan import ClassPlanResource, ClassPlanCollectionResource
 

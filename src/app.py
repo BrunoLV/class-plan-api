@@ -1,11 +1,10 @@
 from flask import Flask
 from flask_migrate import Migrate
 
+from src.config.config import app_config
+from src.documentation import documentations
 from src.infrastructure.db.orm.orms import db
 from src.resources import blueprints
-from src.documentation import documentations
-
-from src.config.config import app_config
 
 
 def create_app(config_name):

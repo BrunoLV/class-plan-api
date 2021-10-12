@@ -1,7 +1,6 @@
 import os
 
 import instance.config as cfg
-
 from src.app import create_app
 
 config_name = os.getenv('FLASK_CONFIG')
