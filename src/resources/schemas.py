@@ -4,7 +4,8 @@ from marshmallow import Schema, fields, validate, types, ValidationError
 
 
 class TeacherSchema(Schema):
-    code = fields.Str(required=True, metadata={"description": "Teacher's code"}, validate=validate.Length(min=1, error="TESE"))
+    code = fields.Str(required=True, metadata={"description": "Teacher's code"},
+                      validate=validate.Length(min=1, error="TESE"))
     name = fields.Str(required=True, metadata={"description": "Teacher's name"}, validate=validate.Length(min=3))
 
 

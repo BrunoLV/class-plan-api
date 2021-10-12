@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_migrate import Migrate
 
 from src.infrastructure.db.orm.orms import db
 from src.resources import blueprints
@@ -16,7 +17,10 @@ def create_app(config_name):
         blueprints.init_blueprint_class_plan()
         documentations.init_documentation()
 
+    migrate = Migrate(app, db)
     db.init_app(app)
+
+    migrate.init_app(app, db)
 
     @app.errorhandler(422)
     def handler_error_422(error):

@@ -34,13 +34,15 @@ class ClassPlanResource(MethodResource, Resource):
 
     @doc(description="Update a class plan", tags=["class-plan"])
     @use_kwargs(ClassPlanRequestSchema)
-    @marshal_with(None, code=204, description="Resource updated")
+    @marshal_with(None, code=204, description="Resource updated", apply=False)
     @marshal_with(None, code=404, description="Resource not found")
     def put(self, code, **kwargs):
         try:
             command = ClassPlanResource._fill_update_command(code, kwargs)
             self.controller.update(command)
-            return '', 204
+            response = make_response()
+            response.status_code = 204
+            return response
         except EntityhNotFoundError:
             abort(404)
 
@@ -51,7 +53,9 @@ class ClassPlanResource(MethodResource, Resource):
         try:
             command = ClassPlanResource._fill_delete_command(code)
             self.controller.delete(command)
-            return '', 204
+            response = make_response()
+            response.status_code = 204
+            return response
         except EntityhNotFoundError:
             abort(404)
 
@@ -104,7 +108,9 @@ class ClassPlanCollectionResource(MethodResource, Resource):
         if len(entities) > 0:
             return entities, 200
         else:
-            return '', 204
+            response = make_response()
+            response.status_code = 204
+            return response
 
     @staticmethod
     def _fill_create_command(kwargs):
